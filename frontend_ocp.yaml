@@ -42,8 +42,7 @@ spec:
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  annotations:
-    name: chat-app-frontend
+  name: chat-app-backend
   labels:
     app: chat-app-frontend
 spec:
