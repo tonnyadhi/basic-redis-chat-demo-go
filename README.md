@@ -15,7 +15,6 @@ This fork contains the instruction for deploying Redis-Go-Chat-App on OpenShift
 - Grab login credentials from your OpenShift Console (shown below)
 - Login to OC CLI
 
-
 ### Deploying Go Lang  Backened on OpenShift
 
 ```
