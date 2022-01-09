@@ -1,5 +1,8 @@
 # Redis - Go Lang - Socket.io - React :: Chat App Demo on OpenShift
 
+![image](https://user-images.githubusercontent.com/9701902/148700285-3a7dd1db-c60c-41e0-b878-970b8f6f7390.png)
+
+
 ## Introduction
 
 Thanks to [Ajeet Raina](https://github.com/ajeetraina) for introducing me to the original repository which can be found [here](https://github.com/redis-developer/basic-redis-chat-demo-go) and [Roman Kurylchyk](https://github.com/beqdev) for initial contribution.
@@ -21,7 +24,16 @@ This fork contains the instruction for deploying Redis-Go-Chat-App on OpenShift
 
 - Login to OC CLI
 
+<<<<<<< HEAD
 ### Deploying Go Lang  Backend on OpenShift
+=======
+![image](https://user-images.githubusercontent.com/9701902/148698819-b255e666-0dbf-4fe2-ba26-db46c5ee4734.png)
+
+
+### Deploying Go Lang  Backened on OpenShift
+>>>>>>> 17ec1a146964094c79cd744bad595103825885fe
+
+- This demo application requires Redis, you can create your free Redis cluster provide by Redis Inc from [here](https://redis.com/try-free/)
 
 ```
 # Set up Redis cluster address and credentials
