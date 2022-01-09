@@ -11,9 +11,9 @@ const (
 	envNameRedisAddress   = "REDIS_ADDRESS"
 	envNameRedisPassword  = "REDIS_PASSWORD"
 
-	defaultRedisAddress   = "localhost:6379"
-	defaultServerAddress  = ":40080"
-	defaultClientLocation = "/usr/local/share/dinamicka/public"
+	defaultRedisAddress   = "0.0.0.0:6379"
+	defaultServerAddress  = ":5000"
+	defaultClientLocation = "/api/public"
 )
 
 type Config struct {
