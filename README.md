@@ -26,6 +26,8 @@ This fork contains the instruction for deploying Redis-Go-Chat-App on OpenShift
 
 ### Deploying Go Lang  Backened on OpenShift
 
+- This demo application requires Redis, you can create your free Redis cluster provide by Redis Inc from [here](https://redis.com/try-free/)
+
 ```
 # Set up Redis cluster address and credentials
 # used during Deployment
