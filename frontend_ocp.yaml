@@ -16,16 +16,14 @@ metadata:
   labels:
     app: chat-app-backend
 spec:
-  nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
       name: 'chat-app-backend:latest'
-  resources: {}
   successfulBuildsHistoryLimit: 5
   failedBuildsHistoryLimit: 5
   strategy:
-    type: Docker
+    type: Source
   source:
     type: Git
     git:
@@ -35,61 +33,63 @@ spec:
     - type: ConfigChange
   runPolicy: Serial
 ---
-apiVersion: v1
-kind: ServiceAccount
+kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: chat-app-backend-sa
----
-kind: DeploymentConfig
-apiVersion: apps.openshift.io/v1
-metadata:
-  name: chat-app-backend
+  annotations:
+    name: chat-app-frontend
   labels:
-    app: chat-app-backend
+    app: chat-app-frontend
 spec:
-  strategy:
-    type: Rolling
-    rollingParams:
-      updatePeriodSeconds: 1
-      intervalSeconds: 1
-      timeoutSeconds: 600
-      maxUnavailable: 25%
-      maxSurge: 25%
-    resources: {}
-    activeDeadlineSeconds: 21600
-  triggers:
-    - type: ConfigChange
-    - type: ImageChange
-      imageChangeParams:
-        automatic: true
-        containerNames:
-          - chat-app-backend
-        from:
-          kind: ImageStreamTag
-          name: "chat-app-backend:latest"
   replicas: 1
-  revisionHistoryLimit: 5
-  test: false
   selector:
-    app: chat-app-backend
-    deploymentconfig: chat-app-backend
+    matchLabels:
+      deployment: chat-app-frontend
   template:
     metadata:
       labels:
-        app: chat-app-backend
-        deploymentconfig: chat-app-backend
+        deployment: chat-app-frontend
     spec:
+      volumes:
+        - name: volume-wptnf
+          configMap:
+            name: chat-app-frontend
+            defaultMode: 420
       containers:
-        - name: chat-app-backend
-          image: chat-app-backend:latest
+        - name: chat-app-frontend
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/karasing-stage/chat-app-frontend
           ports:
             - containerPort: 8080
               protocol: TCP
-          serviceAccountName: chat-app-backend-sa
-          env:
-            - name: REACT_APP_CHAT_APP_BACKEND
-              value: "chat-app-backend:5000"
+          resources: {}
+          volumeMounts:
+            - name: volume-wptnf
+              mountPath: /tmp
           imagePullPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: chat-app-frontend
+  labels:
+    app: chat-app-frontend
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+  selector:
+    deployment: chat-app-frontend
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
