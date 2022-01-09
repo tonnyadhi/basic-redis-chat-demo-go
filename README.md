@@ -13,6 +13,12 @@ This fork contains the instruction for deploying Redis-Go-Chat-App on OpenShift
 - Once you done creating your Developer Sandbox, login to OpenShift Console
 - Download the [OpenShift Client] on your local machine
 - Grab login credentials from your OpenShift Console (shown below)
+
+![image](https://user-images.githubusercontent.com/9701902/148698168-67a781e8-8473-47cf-83b6-0c0c3c2e6c3c.png)
+
+![image](https://user-images.githubusercontent.com/9701902/148698185-9f4bbf50-5ebc-4140-8857-0910d4568584.png)
+
+
 - Login to OC CLI
 
 ### Deploying Go Lang  Backened on OpenShift
@@ -81,3 +87,16 @@ echo "https://"$REACT_APP_CHAT_FRONTEND
 
 ### Summary
 At this point you would be having the full fledge Redis - Go Lang - Socket.io - React :: Chat App Demo running on OpenShift
+- Chat App login screen
+
+![image](https://user-images.githubusercontent.com/9701902/148698222-67af7243-0269-4f32-a699-384ea5c11f65.png)
+
+- Chat Screen
+
+![image](https://user-images.githubusercontent.com/9701902/148698243-68fcddf8-1148-4fe2-9c23-b40b48b69ca4.png)
+
+- OpenShift Resources
+
+![image](https://user-images.githubusercontent.com/9701902/148698287-391751f5-3289-485d-807a-cc0b8f17c97d.png)
+
+
