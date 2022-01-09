@@ -2,9 +2,9 @@
 kind: ImageStream
 apiVersion: image.openshift.io/v1
 metadata:
-  name: chat-app-backend
+  name: chat-app-frontend
   labels:
-    app: chat-app-backend
+    app: chat-app-frontend
 spec:
   lookupPolicy:
     local: false
@@ -12,14 +12,14 @@ spec:
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: chat-app-backend
+  name: chat-app-frontend
   labels:
-    app: chat-app-backend
+    app: chat-app-frontend
 spec:
   output:
     to:
       kind: ImageStreamTag
-      name: 'chat-app-backend:latest'
+      name: 'chat-app-frontend:latest'
   successfulBuildsHistoryLimit: 5
   failedBuildsHistoryLimit: 5
   strategy:
