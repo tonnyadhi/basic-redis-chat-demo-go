@@ -9,10 +9,10 @@ This fork contains the instruction for deploying Redis-Go-Chat-App on OpenShift
 ## Chat App Setup on OpenShift
 
 ### Get a Free OpenShift Cluster
-- You can get your Free OpenShfit Developer Sandbox by simply creating your accont [here](https://developers.redhat.com/developer-sandbox/get-started)
-- Once you done creating your Developer Sandbox, login to OpenShift Console
-- Download the [OpenShift Client] on your local machine
-- Grab login credentials from your OpenShift Console (shown below)
+- You can get your Free OpenShift Developer Sandbox by simply creating a free account [here](https://developers.redhat.com/developer-sandbox/get-started)
+- Launch your Developer Sandbox and login to OpenShift Console
+- Download the [OpenShift Client](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html) on your local machine
+- Grab `OC CLI` login credentials from your OpenShift Console (shown below)
 
 ![image](https://user-images.githubusercontent.com/9701902/148698168-67a781e8-8473-47cf-83b6-0c0c3c2e6c3c.png)
 
@@ -21,7 +21,7 @@ This fork contains the instruction for deploying Redis-Go-Chat-App on OpenShift
 
 - Login to OC CLI
 
-### Deploying Go Lang  Backened on OpenShift
+### Deploying Go Lang  Backend on OpenShift
 
 ```
 # Set up Redis cluster address and credentials
@@ -40,7 +40,7 @@ oc new-app golang~https://github.com/ksingh7/basic-redis-chat-demo-go.git --name
 # This YAML file will create an OpenShift Service and OpenShift Route to make the endpoint available to the world
 oc apply -f https://raw.githubusercontent.com/ksingh7/basic-redis-chat-demo-go/master/backend_ocp.yaml
 
-# Building container image could take sometime, you can mointor the build process by using the following command
+# Building container image could take sometime, you can monitor the build process by using the following command
 oc logs -f buildconfig/chat-app-backend
 
 # once the build process is completed, you can check the status of pods using the following command
@@ -67,7 +67,7 @@ export REACT_APP_CHAT_BACKEND=$(oc get route chat-app-backend -o=jsonpath='{.spe
 echo "REACT_APP_CHAT_BACKEND="$REACT_APP_CHAT_BACKEND >> .env
 echo "REACT_APP_HTTP_PROXY=https://"$REACT_APP_CHAT_BACKEND >> .env
 
-# Create a Openshift Config Map with the .enve file
+# Create a Openshift Config Map with the .env file
 oc create configmap chat-app-frontend --from-file=.env 
 
 # Use the following YAML to create container image from source git repository and create Openshift Deployment configuration, Service and Route
@@ -79,7 +79,7 @@ oc logs -f buildconfig/chat-app-frontend
 # Once the build process is completed, you can check the status of pods using the following command
 oc get po
 
-# Tip : Even after container is running, allow a few minutes for React app to compiled and available to the world
+# Even after frontend container is running, allow a few minutes for React app to compile and start the server and be available to the world
 
 export REACT_APP_CHAT_FRONTEND=$(oc get route chat-app-frontend -o=jsonpath='{.spec.host}')
 echo "https://"$REACT_APP_CHAT_FRONTEND
