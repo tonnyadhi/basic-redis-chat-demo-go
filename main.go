@@ -21,6 +21,9 @@ func main() {
 	http.HandleFunc("/links", func(writer http.ResponseWriter, request *http.Request) {
 		_,_ = writer.Write([]byte(`{"github":"https://github.com/redis-developer/basic-redis-chat-demo-go"}`))
 	})
+	http.HandleFunc("/health", func(writer http.ResponseWriter, request *http.Request) {
+		_,_ = writer.Write([]byte(`{"health":"OK"}`))
+	})
 	http.Handle("/", http.FileServer(http.Dir(cnf.ClientLocation)))
 	log.Fatal(http.ListenAndServe(cnf.ServerAddress, nil))
 }
