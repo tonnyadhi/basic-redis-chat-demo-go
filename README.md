@@ -88,3 +88,16 @@ echo "https://"$REACT_APP_CHAT_FRONTEND
 
 ### Summary
 At this point you would be having the full fledge Redis - Go Lang - Socket.io - React :: Chat App Demo running on OpenShift
+- Chat App login screen
+
+![image](https://user-images.githubusercontent.com/9701902/148698222-67af7243-0269-4f32-a699-384ea5c11f65.png)
+
+- Chat Screen
+
+![image](https://user-images.githubusercontent.com/9701902/148698243-68fcddf8-1148-4fe2-9c23-b40b48b69ca4.png)
+
+- OpenShift Resources
+
+![image](https://user-images.githubusercontent.com/9701902/148698287-391751f5-3289-485d-807a-cc0b8f17c97d.png)
+
+
