@@ -24,6 +24,12 @@ spec:
   failedBuildsHistoryLimit: 5
   strategy:
     type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'nodejs:14-ubi8'
+  postCommit: {}
   source:
     type: Git
     git:
