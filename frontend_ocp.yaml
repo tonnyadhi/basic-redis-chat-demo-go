@@ -56,7 +56,7 @@ spec:
         deployment: chat-app-frontend
     spec:
       volumes:
-        - name: volume-wptnf
+        - name: env-cm-volume
           configMap:
             name: chat-app-frontend
             defaultMode: 420
@@ -69,7 +69,7 @@ spec:
               protocol: TCP
           resources: {}
           volumeMounts:
-            - name: volume-wptnf
+            - name: env-cm-volume
               mountPath: /tmp
           imagePullPolicy: Always
   strategy:
