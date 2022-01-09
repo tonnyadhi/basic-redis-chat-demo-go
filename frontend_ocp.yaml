@@ -90,3 +90,18 @@ spec:
             - name: REACT_APP_CHAT_APP_BACKEND
               value: "chat-app-backend:5000"
           imagePullPolicy: Always
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: chat-app-frontend
+  name: chat-app-frontend
+spec:
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: chat-app-frontend
+    weight: 100
+  wildcardPolicy: None

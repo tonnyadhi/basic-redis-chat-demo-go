@@ -20,7 +20,6 @@ metadata:
     app: chat-app-backend
   name: chat-app-backend
 spec:
-  host: chat-app-backend-karasing-stage.apps.sandbox.x8i5.p1.openshiftapps.com
   tls:
     termination: edge
   to:
