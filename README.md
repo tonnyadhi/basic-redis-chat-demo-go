@@ -1,5 +1,8 @@
 # Redis - Go Lang - Socket.io - React :: Chat App Demo on OpenShift
 
+![image](https://user-images.githubusercontent.com/9701902/148700285-3a7dd1db-c60c-41e0-b878-970b8f6f7390.png)
+
+
 ## Introduction
 
 Thanks to [Ajeet Raina](https://github.com/ajeetraina) for introducing me to the original repository which can be found [here](https://github.com/redis-developer/basic-redis-chat-demo-go) and [Roman Kurylchyk](https://github.com/beqdev) for initial contribution.
