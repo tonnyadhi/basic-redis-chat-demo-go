@@ -63,7 +63,7 @@ spec:
       containers:
         - name: chat-app-frontend
           image: >-
-            default-route-openshift-image-registry.apps.sandbox.x8i5.p1.openshiftapps.com/ragnalinux-dev/chat-app-frontend
+            image-registry.openshift-image-registry.svc:5000/ragnalinux-dev/chat-app-frontend
           ports:
             - containerPort: 8080
               protocol: TCP
