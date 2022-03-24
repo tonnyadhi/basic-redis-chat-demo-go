@@ -1,0 +1,112 @@
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: chat-app-frontend-02
+  labels:
+    app: chat-app-frontend-02
+spec:
+  lookupPolicy:
+    local: false
+---
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: chat-app-frontend-02
+  labels:
+    app: chat-app-frontend-02
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'chat-app-frontend:latest'
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'nodejs:14-ubi8'
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/tonnyadhi/basic-redis-chat-demo-go.git'
+    contextDir: client
+  triggers:
+    - type: ConfigChange
+  runPolicy: Serial
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: chat-app-frontend-02
+  labels:
+    app: chat-app-frontend-02
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: chat-app-frontend-02
+  template:
+    metadata:
+      labels:
+        deployment: chat-app-frontend-02
+    spec:
+      volumes:
+        - name: env-cm-volume
+          configMap:
+            name: chat-app-frontend-02
+            defaultMode: 420
+      containers:
+        - name: chat-app-frontend
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/ragnalinux-dev/chat-app-frontend-02
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: env-cm-volume
+              mountPath: /tmp
+          imagePullPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: chat-app-frontend-02
+  labels:
+    app: chat-app-frontend-02
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+  selector:
+    deployment: chat-app-frontend-02
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: chat-app-frontend-02
+  name: chat-app-frontend-02
+spec:
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: chat-app-frontend-02
+    weight: 100
+  wildcardPolicy: None
