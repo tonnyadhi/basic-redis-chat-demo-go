@@ -33,7 +33,7 @@ spec:
   source:
     type: Git
     git:
-      uri: 'https://github.com/ksingh7/basic-redis-chat-demo-go.git'
+      uri: 'https://github.com/tonnyadhi/basic-redis-chat-demo-go.git'
     contextDir: client
   triggers:
     - type: ConfigChange
@@ -63,7 +63,7 @@ spec:
       containers:
         - name: chat-app-frontend
           image: >-
-            image-registry.openshift-image-registry.svc:5000/karasing-stage/chat-app-frontend
+            default-route-openshift-image-registry.apps.sandbox.x8i5.p1.openshiftapps.com/ragnalinux-dev/chat-app-frontend
           ports:
             - containerPort: 8080
               protocol: TCP
