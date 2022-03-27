@@ -48,6 +48,6 @@ oc rollout restart deployment chat-app-frontend-02
 
 
 echo "Fetching frontned URL"
-export REACT_APP_CHAT_FRONTEND=$(oc get route chat-app-frontend -o=jsonpath='{.spec.host}')
+export REACT_APP_CHAT_FRONTEND=$(oc get route chat-app-frontend-02 -o=jsonpath='{.spec.host}')
 echo "your app can be accessed at:"
 echo "https://"$REACT_APP_CHAT_FRONTEND
