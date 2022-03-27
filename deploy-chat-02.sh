@@ -21,7 +21,7 @@ echo "Waiting pod to be running"
 sleep 20s
 
 echo "Check Backend Health"
-export REACT_APP_CHAT_BACKEND=$(oc get route chat-app-backend -o=jsonpath='{.spec.host}')
+export REACT_APP_CHAT_BACKEND=$(oc get route chat-app-backend-02 -o=jsonpath='{.spec.host}')
 curl https://$REACT_APP_CHAT_BACKEND/health
 echo ""
 
