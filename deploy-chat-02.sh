@@ -2,7 +2,7 @@
 
 GIT_REPO=https://github.com/tonnyadhi/basic-redis-chat-demo-go
 RAW_GIT_REPO=https://raw.githubusercontent.com/tonnyadhi/basic-redis-chat-demo-go/master
-REDIS_ADDR=redis:6379
+REDIS_ADDR=redis-02:6379
 REDIS_PASSWORD=selainredis123
 
 echo "Creating OpenShift Chat Backend Service"
