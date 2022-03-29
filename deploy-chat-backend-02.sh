@@ -31,23 +31,3 @@ echo "REACT_APP_CHAT_BACKEND="$REACT_APP_CHAT_BACKEND >> .env-02
 echo "REACT_APP_HTTP_PROXY=https://"$REACT_APP_CHAT_BACKEND >> .env-02
 oc create configmap chat-app-frontend-02 --from-file=.env-02
 echo ""
-
-
-echo "Creating OpenShift Chat Frontend Service"
-oc apply -f https://raw.githubusercontent.com/tonnyadhi/basic-redis-chat-demo-go/master/deploy_frontend_on_ocp_02.yaml 
-echo ""
-
-echo "Display Build Status"
-oc logs -f buildconfig/chat-app-frontend-02
-echo ""
-
-
-echo "Waiting pod to be running"
-sleep 10s
-oc rollout restart deployment chat-app-frontend-02
-
-
-echo "Fetching frontned URL"
-export REACT_APP_CHAT_FRONTEND=$(oc get route chat-app-frontend-02 -o=jsonpath='{.spec.host}')
-echo "your app can be accessed at:"
-echo "https://"$REACT_APP_CHAT_FRONTEND
