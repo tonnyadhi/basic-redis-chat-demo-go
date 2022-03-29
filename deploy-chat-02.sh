@@ -29,7 +29,7 @@ echo ""
 echo "Preparing env for frontend"
 echo "REACT_APP_CHAT_BACKEND="$REACT_APP_CHAT_BACKEND >> .env-02
 echo "REACT_APP_HTTP_PROXY=https://"$REACT_APP_CHAT_BACKEND >> .env-02
-oc create configmap chat-app-frontend-02 --from-file=.env-02
+oc create configmap chat-app-frontend-02 --from-file=".env"=${PWD}/.env-02
 echo ""
 
 
